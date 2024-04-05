@@ -1,3 +1,4 @@
+#include <X11/XF86keysym.h>
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
@@ -69,8 +70,16 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont}
 static const char *termcmd[]  = { "st", NULL };
 static const char *firefoxcmd[]  = { "firefox", NULL };
 
+/* Knob vol */
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
+static const char *upvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1%", NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-1%", NULL };
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+  { 0,              XF86XK_AudioMute,        spawn,          {.v = mutevol } },
+  { 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol } },
+  { 0,              XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
 	{ MODKEY,                       XK_j,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_k,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_h,      focusstack,     {.i = -1 } },
@@ -83,7 +92,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_w,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_Return,  	   setlayout,      {0} },
+	{ MODKEY,                       XK_Return, setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_r,  	   togglefloating, {0} },
 	{ MODKEY,                       XK_BackSpace, spawn,          {.v = dmenucmd } },
 	{ MODKEY,			                  XK_space,  spawn,          {.v = termcmd } },
