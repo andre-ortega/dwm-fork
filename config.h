@@ -94,7 +94,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_Return, setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_r,  	   togglefloating, {0} },
-	{ MODKEY,                       XK_BackSpace, spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_BackSpace, spawn,       {.v = dmenucmd } },
 	{ MODKEY,			                  XK_space,  spawn,          {.v = termcmd } },
 	{ MODKEY,			                  XK_p,      spawn,          {.v = firefoxcmd } },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
